@@ -3,6 +3,7 @@ import './../assets/css/reset.css';
 import './../assets/css/style.css';
 import Login from "./home/Login";
 import Register from "./home/Register";
+import Main from "./habits/Main";
 
 export default function App() {
     return (
@@ -10,8 +11,8 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/cadastro" element={<Register />} />
-                {/* <Route path="/habitos" element={<TelaHabitos />} />
-                <Route path="/hoje" element={<TelaHoje />} />
+                <Route path="/habitos" element={<Main />} />
+                {/* <Route path="/hoje" element={<TelaHoje />} />
                 <Route path="/historico" element={<TelaHistorico />} /> */}
             </Routes>
         </BrowserRouter>

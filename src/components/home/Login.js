@@ -1,14 +1,48 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 import logo from '../../assets/img/logo.png';
 
+
+
 function Login() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+
+    function handleLogin() {
+
+        const body = {
+            email: email,
+            password: password,
+        }
+
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
+
+        promise
+            .then(res => {
+                console.log(res.data);
+                navigate("/habitos")
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         <Home>
             <img src={logo} alt="TrackIt" />
-            <input placeholder='email' />
-            <input placeholder='senha' />
-            <div>Entrar</div>
-            <p>Não tem uma conta? Cadastre-se!</p>
+            <Form>
+                <input type="text" placeholder='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="text" placeholder='senha' required value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Form>
+            <div className="button" onClick={handleLogin}>Entrar</div>
+            <Link to="/cadastro">
+                <p>Não tem uma conta? Cadastre-se!</p>
+            </Link>
         </Home>
     );
 }
@@ -45,7 +79,7 @@ const Home = styled.div`
         color: #DBDBDB;
     }
 
-    div {
+    .button {
         width: 80%;
         heigth: 45px;
         padding: 10px;
@@ -73,6 +107,14 @@ const Home = styled.div`
         text-decoration-line: underline;
         color: #52B6FF;
     }
-`
+`;
+
+const Form = styled.form`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`;
 
 export default Login;

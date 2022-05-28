@@ -1,16 +1,81 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/img/logo.png';
+import axios from 'axios';
 
 function Register() {
+
+    /* const URL_REGISTER = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+    
+    const promise = axios.post(URL_REGISTER, 
+        {
+            email: inputData.email,
+            name: inputData.name,
+            image: inputData.image,
+            password: inputData.password
+        }
+    );
+
+    promise.then((response) => {
+        console.log("sucesso")
+    });
+
+    promise.catch(error => alert("Erro no envio das informações"));
+
+    const [inputData, setInputData] = useState({
+        email: "",
+        name: "",
+        image: "",
+        password: ""
+    }); */
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
+
+    const navigate = useNavigate();
+
+    function Navigate() {
+        navigate("/");
+    }
+
+    function SignUp() {
+
+        const body = {
+            email: email,
+            name: name,
+            image: image,
+            password: password,
+        }
+
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
+
+        promise
+            .then(res => {
+                console.log(res.data);
+                Navigate();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
+
     return (
         <Registe>
             <img src={logo} alt="TrackIt" />
-            <input placeholder='email' />
-            <input placeholder='senha' />
-            <input placeholder='nome' />
-            <input placeholder='foto' />
-            <div>Cadastrar</div>
-            <p>Já tem uma conta? Faça login!</p>
+            <Form>
+                <input type="text" placeholder='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="text" placeholder='senha' required value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="text" placeholder='nome' required value={name} onChange={(e) => setName(e.target.value)} />
+                <input type="text" placeholder='foto' required value={image} onChange={(e) => setImage(e.target.value)} />
+            </Form>
+            <div onClick={SignUp}>Cadastrar</div>
+            <Link to="/" >
+                <p>Já tem uma conta? Faça login!</p>
+            </Link>
         </Registe>
     );
 }
@@ -75,6 +140,14 @@ const Registe = styled.div`
         text-decoration-line: underline;
         color: #52B6FF;
     }
-`
+`;
+
+const Form = styled.form`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`;
 
 export default Register;
