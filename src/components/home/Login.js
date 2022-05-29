@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import logo from '../../assets/img/logo.png';
 
 
-
-function Login() {
+function Login( {setToken} ) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,6 +24,7 @@ function Login() {
         promise
             .then(res => {
                 console.log(res.data);
+                setToken(res.data.token);
                 navigate("/habitos")
             })
             .catch(err => {

@@ -6,30 +6,6 @@ import axios from 'axios';
 
 function Register() {
 
-    /* const URL_REGISTER = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
-    
-    const promise = axios.post(URL_REGISTER, 
-        {
-            email: inputData.email,
-            name: inputData.name,
-            image: inputData.image,
-            password: inputData.password
-        }
-    );
-
-    promise.then((response) => {
-        console.log("sucesso")
-    });
-
-    promise.catch(error => alert("Erro no envio das informações"));
-
-    const [inputData, setInputData] = useState({
-        email: "",
-        name: "",
-        image: "",
-        password: ""
-    }); */
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
