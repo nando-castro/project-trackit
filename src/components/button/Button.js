@@ -9,9 +9,9 @@ export default function Button({ text, type, destiny, action, loading }) {
                 <span>{text}</span>
             </ Container>
         </Link>
-    );
+    )
 }
 
 const Container = styled.button`
-    text-align: center
+    text-align: center;
 `;

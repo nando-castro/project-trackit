@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import axios from 'axios';
 import { useState } from 'react';
 import { useAuth } from '../../Providers/auth';
@@ -81,9 +82,7 @@ export default function BildHabit({ setCreatingHabit }) {
     )
 }
 
-import styled from "styled-components";
-
-export const Container = styled.div`
+const Container = styled.div`
 height: 180px;
 padding: 18px;
 margin: 0 18px 30px;
@@ -97,18 +96,21 @@ input{
     height: 45px;
     border-radius: 5px;
 }
-`
+`;
+
 export const Days = styled.div`
 display: flex;
 gap: 8px;
-`
+`;
+
 export const Botoes = styled.div`
 display: flex;
 justify-content: end;
 align-items: center;
 gap: 20px;
-`
-export const Cancel = styled.div`
+`;
+
+const Cancel = styled.div`
 font-size: 15.976px;
 line-height: 20px;
 color: #52B6FF;
@@ -117,9 +119,9 @@ ${props => props.loading && 'opacity: 0.5;'}
 &:hover{
     cursor: pointer;
 }
-`
+`;
 
-export const Save = styled.div`
+const Save = styled.div`
 width: 84px;
 height: 35px;
 background: #52B6FF;
@@ -132,4 +134,4 @@ align-items: center;
 &:hover{
     cursor: pointer;
 }
-`
+`;

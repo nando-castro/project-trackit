@@ -1,3 +1,6 @@
+
+  
+import { Container } from "./style";
 import axios from 'axios';
 import Button from "../Button";
 import { useState } from "react";
@@ -7,12 +10,12 @@ import logo from '../../assets/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
-import styled from 'styled-components';
 
-export default function PageRegister({ loading, setLoading }) {
+export default function PageRegister() {
 
     const navigate = useNavigate();
-    const [user, setUser] = useState({
+    const [loading, setLoading] = useState(false);
+    const [userRegister, setUserRegister] = useState({
         email: '',
         name: '',
         image: '',
@@ -23,7 +26,7 @@ export default function PageRegister({ loading, setLoading }) {
         e.preventDefault();
         setLoading(true);
 
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', { ...user });
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', { ...userRegister });
         promise.then(response => {
             navigate('/');
             setLoading(false);
@@ -36,34 +39,36 @@ export default function PageRegister({ loading, setLoading }) {
     }
 
     function ChangeInput(e) {
-        setUser({ ...user, [e.target.name]: e.target.value })
+        setUserRegister({ ...userRegister, [e.target.name]: e.target.value })
     }
 
     return (
-        <ContainerRegister>
+        <Container>
             <img src={logo} alt="Logo App" />
             <ToastContainer position="top-right" />
 
             <form>
-                <input type="email" placeholder="E-mail" value={user.email} name="email" onChange={ChangeInput} />
-                <input type="password" placeholder='Senha' value={user.password} name="password" onChange={ChangeInput} />
-                <input type="text" placeholder='Nome' value={user.name} name="name" onChange={ChangeInput} />
-                <input type="url" placeholder="Imagem" value={user.image} name="image" onChange={ChangeInput} />
+                <input type="email" placeholder="E-mail" value={userRegister.email} name="email" onChange={ChangeInput} />
+                <input type="password" placeholder='Senha' value={userRegister.password} name="password" onChange={ChangeInput} />
+                <input type="text" placeholder='Nome' value={userRegister.name} name="name" onChange={ChangeInput} />
+                <input type="url" placeholder="Imagem" value={userRegister.image} name="image" onChange={ChangeInput} />
 
                 {loading === false ? (
                     <Button type={'submit'} text={'Cadastrar'} destiny={''} action={register} />
                 ) : (
-                    <Loader type="Rings" color="#52B6FF" height={100} width={100} />
+                    <Loader type="ThreeDots" color="#52B6FF" height={100} width={100} />
                 )}
             </form>
 
-            <Button type="button" text={'Já tem uma conta? Faça login'} destiny={'/'} />
-        </ ContainerRegister>
+            <Button loading={loading} type="button" text={'Já tem uma conta? Faça login'} destiny={'/'} />
+        </ Container>
     )
 }
 
 
-const ContainerRegister = styled.div`
+import styled from 'styled-components';
+
+const Container = styled.div`
     height: 100vh;
     
     align-items: center;
@@ -109,4 +114,4 @@ const ContainerRegister = styled.div`
             }
         }
     }
-`;
+`

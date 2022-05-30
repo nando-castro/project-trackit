@@ -1,21 +1,42 @@
-import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Container, Button } from './style';
+import { useAuth } from '../../Providers/auth';
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import styled from "styled-components";
 
 export default function Menu() {
+
+    const { progress } = useAuth();
+
     return (
         <>
             <Container>
                 <Link to='/habitos'>Hábitos</Link>
                 <Link to='/historico'>Histórico</Link>
-                <Button>Hoje</Button>
+
+                <Button to='/hoje'>
+                    <CircularProgressbar
+                        value={progress}
+                        text={'Hoje'}
+                        strokeWidth={10}
+                        styles={buildStyles({
+                            textColor: "#fff",
+                            pathColor: "#ffffff",
+                            trailColor: "transparent"
+                        })}
+                    />
+                </Button>
             </Container>
         </>
 
     )
 }
 
-const Container = styled.div`
+
+
+
+export const Container = styled.div`
 width: 100vw;
 height: 70px;
 background: #fff;
@@ -31,15 +52,18 @@ left: 0;
 index: 10;
 a{
     color: #52B6FF;
+    &:hover{
+        cursor: pointer;
+    }
 }
-`
+`;
 
-const Button = styled.div`
+const Button = styled(Link)`
 width: 91px;
 height: 91px;
+padding: 5px;
 background: #52B6FF;
 border-radius: 50%;
-color: #fff;
 position: absolute;
 bottom: 10px;
 left: 0;
@@ -48,4 +72,4 @@ margin: auto;
 display: flex;
 justify-content: center;
 align-items: center;
-` 
+`;

@@ -1,18 +1,18 @@
+import styled from 'styled-components';
 import logoHeader from '../../assets/logoHeader.png';
 import { useAuth } from '../../Providers/auth';
 import { Container } from './style';
 
 export default function Header() {
 
-    const { user } = useAuth();
-    console.log(user);
+    const { user, setNavbar } = useAuth();
 
     return (
         user !== null && (
             <Container>
                 <img src={logoHeader} alt="Logo app" />
                 <div className="userImage">
-                    <img src={user.image} alt="Imagem usuário" />
+                    <img src={user.image} alt="Imagem usuário" onClick={() => setNavbar(true)} />
                 </div>
             </ Container>
         )
@@ -32,7 +32,7 @@ const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    index: 10;
+    z-index: 10;
     img {
         height: 40px;
     }
