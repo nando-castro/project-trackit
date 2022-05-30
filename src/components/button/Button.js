@@ -14,4 +14,5 @@ export default function Button({ text, type, destiny, action, loading }) {
 
 const Container = styled.button`
     text-align: center;
+    border: none;
 `;

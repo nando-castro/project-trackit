@@ -51,7 +51,7 @@ export default function Today() {
             <Title text={`${daysOfWeek[dayjs().day()]}, ${dayjs().format('DD/MM')}`} description={subtitle} finishedTasks={numberFinishedTasks} />
 
             {tasks.length === 0 && (
-                <Menssage text={"Você não tem nenhum hábito cadastrado para hoje ainda. Click em 'Hábitos' e crie um novo para começar! :)"} />
+                <Menssage text={"Você não tem nenhum hábito cadastrado para hoje ainda. Click em Hábitos e crie um novo para começar!😉"} />
             )}
 
             {loading && (

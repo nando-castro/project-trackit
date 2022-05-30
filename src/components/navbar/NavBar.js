@@ -20,7 +20,7 @@ export default function Navbar() {
             <Content>
                 <Top>
                     <img src={logo} alt={'Logo do app'} />
-                    {user && <Text>Obrigado pela <br /> preferência, {user.name}! :)</Text>}
+                    {user && <Text>Obrigado por <br /> usar nosso app,<br /> {user.name}! 😊</Text>}
                 </Top>
                 <Footer>
                     {user && <img src={user.image} alt={'Imagem do usuário logado'} />}
@@ -71,6 +71,7 @@ background: #52B6FF;
 border-radius: 5px;
 color: #fff;
 font-size: 23px;
+border: none;
 &:hover{
     cursor: pointer;
 }
