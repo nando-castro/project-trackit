@@ -1,25 +1,26 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-
+import Login from "./home/Login";
+import Register from "./home/Register";
+import Habits from "./habits/Habits";
+import Today from "./today/Today";
+import History from "./history/History";
+import Navbar from "./navbar/NavBar";
+import { useAuth } from "../context/auth";
 import './../assets/css/reset.css';
 import './../assets/css/style.css';
-import PageLogin from "./home/Login";
-import PageToday from "./today/Today";
-import PageRegister from "./home/Register";
-import History from "./history/History";
-import Habits from "./habits/Habits";
 
 function App() {
 
-    const [loading, setLoading] = useState(false);
+    const { navbar } = useAuth();
 
     return (
         <BrowserRouter>
+            {navbar && <Navbar />}
             <Routes>
-                <Route path='/' element={<PageLogin loading={loading} setLoading={setLoading} setUserData={setUserData} />} />
-                <Route path='/cadastro' element={<PageRegister loading={loading} setLoading={setLoading} />} />
-                <Route path='/habitos' element={<Habits loading={loading} setLoading={setLoading} />} />
-                <Route path='/hoje' element={<PageToday loading={loading} setLoading={setLoading} userData={userData} />} />
+                <Route path='/' element={<Login />} />
+                <Route path='/cadastro' element={<Register />} />
+                <Route path='/habitos' element={<Habits />} />
+                <Route path='/hoje' element={<Today />} />
                 <Route path='/historico' element={<History />} />
             </Routes>
         </BrowserRouter>

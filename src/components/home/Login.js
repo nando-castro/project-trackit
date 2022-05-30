@@ -1,17 +1,15 @@
+import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-import { useAuth } from "../../Providers/auth";
+import { useAuth } from "../../context/auth";
 import axios from "axios";
-import Button from "../Button";
+import Button from "../button/Button";
 import Loader from "react-loader-spinner";
-import logo from '../../assets/logo.png';
-
+import logo from '../../assets/img/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { Container } from "./style";
 
-
-export default function PageLogin() {
+export default function Login() {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -76,8 +74,6 @@ export default function PageLogin() {
         </ Container>
     )
 }
-
-import styled from 'styled-components';
 
 const Container = styled.div`
     height: 100vh;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import logoHeader from '../../assets/logoHeader.png';
-import { useAuth } from '../../Providers/auth';
-import { Container } from './style';
+import logoHeader from '../../assets/img/logoHeader.png';
+import { useAuth } from '../../context/auth';
 
 export default function Header() {
 

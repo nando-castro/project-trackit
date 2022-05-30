@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import axios from 'axios';
 import { useState } from 'react';
-import { useAuth } from '../../Providers/auth';
-import WeekDay from '../WeekDay';
-import { Container, Days, Botoes, Cancel, Save } from './style';
+import { useAuth } from '../../context/auth';
+import WeekDay from '../week/WeekDay';
 import Loader from "react-loader-spinner";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
-export default function BildHabit({ setCreatingHabit }) {
+export default function BuildHabit({ setCreatingHabit }) {
 
     const [daysSelected, setDaysSelected] = useState([]);
     const [loading, setLoading] = useState(false);

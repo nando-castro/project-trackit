@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { Container, Days, Icon } from './style';
-import WeekDay from '../WeekDay';
+import WeekDay from '../week/WeekDay';
 import { TrashOutline } from 'react-ionicons';
-import { useAuth } from '../../Providers/auth';
+import { useAuth } from '../../context/auth';
 import axios from 'axios';
-import Confirm from '../Confirm';
+import Confirm from '../delete/Confirm';
 import { useState } from 'react';
 
 export default function Habit({ habit }) {

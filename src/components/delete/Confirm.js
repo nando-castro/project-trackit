@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export default function Confirm({ setConfirmShow, id, removeHabit }) {
 
     return (

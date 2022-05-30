@@ -4,15 +4,13 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { Calendar } from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
-import { useAuth } from "../../Providers/auth";
-import Header from "../Header";
-import Menu from "../Menu";
-import Title from "../Title";
-import Day from "../DayHistoric";
-import { Container, ContainerCalendar, ContainerDays, DateSelected, styleCalendar } from './style';
+import { useAuth } from "../../context/auth";
+import Header from "../header/Header";
+import Menu from "../menu/Menu";
+import Title from "../title/Title";
+import Day from "../history/HistoryDay";
 
-
-export default function PageHistory() {
+export default function History() {
 
     const [date, setDate] = useState(new Date());
     const { user } = useAuth();

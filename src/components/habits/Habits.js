@@ -1,18 +1,16 @@
 import styled from "styled-components";
-import Header from "../Header";
-import Menu from "../Menu";
-import Title from "../Title";
-import Habit from "../Habit";
-import BildHabit from "../BildHabit";
-import { Container, Top, CreateHabit } from './style';
+import Header from "../header/Header";
+import Menu from "../menu/Menu";
+import Title from "../title/Title";
+import Habit from "../habits/Habit";
+import BuilddHabit from "../habits/BuildHabit";
 import { AddOutline } from 'react-ionicons';
 import { useEffect, useState } from "react";
-import Menssage from "../Message-PageEmpty";
+import Menssage from "../loading/Message";
 import axios from "axios";
-import { useAuth } from "../../Providers/auth";
+import { useAuth } from "../../context/auth";
 
-
-export default function PageHabits() {
+export default function Habits() {
 
     const [creatingHabit, setCreatingHabit] = useState(false);
     const [message, setMessage] = useState(true);
@@ -31,7 +29,7 @@ export default function PageHabits() {
         }
     }, [user])
 
-    function showBildHabit() {
+    function showBuildHabit() {
         setCreatingHabit(true);
     }
 
@@ -40,7 +38,7 @@ export default function PageHabits() {
             <Header />
             <Top>
                 <Title text={"Meus hábitos"} />
-                <CreateHabit onClick={showBildHabit}>
+                <CreateHabit onClick={showBuildHabit}>
                     <AddOutline
                         color='#fff'
                         width="25px"
@@ -48,7 +46,7 @@ export default function PageHabits() {
                 </CreateHabit>
             </Top>
 
-            {creatingHabit && <BildHabit setCreatingHabit={setCreatingHabit} />}
+            {creatingHabit && <BuilddHabit setCreatingHabit={setCreatingHabit} />}
             {(message && habits.length === 0) && <Menssage text={"Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!"} />}
             {(habits && !creatingHabit) && (
                 habits.map((habit) => {

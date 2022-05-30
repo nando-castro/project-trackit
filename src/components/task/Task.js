@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import { CheckmarkOutline } from 'react-ionicons';
-import { useAuth } from '../../Providers/auth';
-import { Texts, Container, Checkbox, CurrentSequence, HighestSequence } from './style';
+import { useAuth } from '../../context/auth';
 
 export default function Task({ task }) {
 

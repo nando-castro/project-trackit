@@ -1,17 +1,14 @@
-
-  
-import { Container } from "./style";
+import styled from 'styled-components';
 import axios from 'axios';
-import Button from "../Button";
+import Button from "../button/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "react-loader-spinner";
-import logo from '../../assets/logo.png';
+import Loader from 'react-loader-spinner';
+import logo from '../../assets/img/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
-
-export default function PageRegister() {
+export default function Register() {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -65,9 +62,6 @@ export default function PageRegister() {
     )
 }
 
-
-import styled from 'styled-components';
-
 const Container = styled.div`
     height: 100vh;
     
@@ -114,4 +108,4 @@ const Container = styled.div`
             }
         }
     }
-`
+`;

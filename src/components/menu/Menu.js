@@ -1,9 +1,8 @@
+import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import { Container, Button } from './style';
-import { useAuth } from '../../Providers/auth';
+import { useAuth } from '../../context/auth';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import styled from "styled-components";
 
 export default function Menu() {
 
@@ -33,10 +32,7 @@ export default function Menu() {
     )
 }
 
-
-
-
-export const Container = styled.div`
+const Container = styled.div`
 width: 100vw;
 height: 70px;
 background: #fff;

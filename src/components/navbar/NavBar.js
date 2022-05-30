@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Container, Content, Background, Exit, Footer, Text, Top } from './style';
-import logo from '../../assets/logo.png';
-import { useAuth } from '../../Providers/auth';
+import logo from '../../assets/img/logo.png';
+import { useAuth } from '../../context/auth';
 import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
@@ -58,7 +57,7 @@ img{
 }
 `;
 
-export const Background = styled.div`
+const Background = styled.div`
 width: 35vw;
 height: 100vh;
 background: #666666;

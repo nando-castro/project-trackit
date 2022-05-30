@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import Header from "../Header";
-import Menu from "../Menu";
-import Title from "../Title";
-import Task from "../Task";
-import { Container, Tasks, LoaderConatiner } from "./style";
+import Header from "../header/Header";
+import Menu from "../menu/Menu";
+import Title from "../title/Title";
+import Task from "../task/Task";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../Providers/auth";
+import { useAuth } from "../../context/auth";
 import axios from "axios";
-import Menssage from "../Message-PageEmpty";
+import Menssage from "../loading/Message";
 import Loader from "react-loader-spinner";
 
-export default function PageToday() {
+export default function Today() {
 
     const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
     const { user, setProgress } = useAuth();
