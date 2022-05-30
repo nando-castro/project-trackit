@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
 import Menssage from "../loading/Message";
-import Loader from "react-loader-spinner";
+import Loader from "./../loading/Loading";
 
 export default function Today() {
 
@@ -57,7 +57,7 @@ export default function Today() {
             {loading && (
                 <LoaderConatiner>
                     <span>Carregando ...</span>
-                    <Loader type='ThreeDots' color={'#52B6FF'} />
+                    <Loader />
                 </LoaderConatiner>
             )}
 

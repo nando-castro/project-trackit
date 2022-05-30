@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useAuth } from '../../context/auth';
 import WeekDay from '../week/WeekDay';
-import Loader from "react-loader-spinner";
+import LoaderSave from "../loading/LoaderSave";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -73,7 +73,7 @@ export default function BuildHabit({ setCreatingHabit }) {
                 <Cancel onClick={cancelBild} loading={loading} disabled={loading}>Cancelar</Cancel>
 
                 <Save loading={loading} onClick={checkData} disabled={loading}>
-                    {loading ? <Loader type="ThreeDots" color="white" width='50px' /> : 'Salvar'}
+                    {loading ? <LoaderSave /> : 'Salvar'}
                 </Save>
             </Botoes>
             <ToastContainer limit={1} />

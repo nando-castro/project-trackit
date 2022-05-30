@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth } from "../../context/auth";
 import axios from "axios";
 import Button from "../button/Button";
-import Loader from "react-loader-spinner";
+import Loader from "../loading/Loading";
 import logo from '../../assets/img/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -46,7 +46,7 @@ export default function Login() {
         });
         promise.catch(err => {
             setLoading(false);
-            toast.error('E-mail ou senha inválidos!');
+            toast.error('Email ou senha inválidos!');
         });
     }
 
@@ -65,7 +65,7 @@ export default function Login() {
                 {loading === false ? (
                     <Button type={'submit'} text={'Entrar'} destiny={''} action={login} />
                 ) : (
-                    <Loader type="ThreeDots" color="#52B6FF" height={100} width={100} />
+                    <Loader />
                 )}
             </form>
 

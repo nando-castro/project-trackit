@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from "../button/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from 'react-loader-spinner';
+import Loader from './../loading/Loading';
 import logo from '../../assets/img/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +24,8 @@ export default function Register() {
         setLoading(true);
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', { ...userRegister });
-        promise.then(response => {
+        promise.then(res => {
+            console.log(res.data);
             navigate('/');
             setLoading(false);
         });
@@ -53,7 +54,7 @@ export default function Register() {
                 {loading === false ? (
                     <Button type={'submit'} text={'Cadastrar'} destiny={''} action={register} />
                 ) : (
-                    <Loader type="ThreeDots" color="#52B6FF" height={100} width={100} />
+                    <Loader />
                 )}
             </form>
 
@@ -64,7 +65,6 @@ export default function Register() {
 
 const Container = styled.div`
     height: 100vh;
-    
     align-items: center;
     justify-content: center;
     gap: 20px;
