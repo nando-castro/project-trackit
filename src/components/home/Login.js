@@ -1,120 +1,99 @@
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import Button from "../Button";
+import Loader from "react-loader-spinner";
+import logo from '../../assets/logo.png';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import styled from 'styled-components';
-import logo from '../../assets/img/logo.png';
 
 
-function Login( {setToken} ) {
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+export default function PageLogin({ loading, setLoading, setUserData }) {
 
     const navigate = useNavigate();
-
-    function handleLogin() {
-
-        const body = {
-            email: email,
-            password: password,
-        }
-
-        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
-
-        promise
-            .then(res => {
-                console.log(res.data);
-                setToken(res.data.token);
-                navigate("/habitos")
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const [userLogin, setUserLogin] = useState({
+        email: '',
+        password: ''
+    });
+    function login(e) {
+        e.preventDefault();
+        setLoading(true);
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', { ...userLogin });
+        promise.then(response => {
+            navigate('/hoje');
+            setLoading(false);
+            setUserData(response.data);
+        });
+        promise.catch(err => {
+            setLoading(false);
+            toast.error('E-mail ou senha inválidos!');
+        });
     }
-
+    function ChangeInput(e) {
+        setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
+    }
     return (
-        <Home>
-            <img src={logo} alt="TrackIt" />
-            <Form>
-                <input type="text" placeholder='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="text" placeholder='senha' required value={password} onChange={(e) => setPassword(e.target.value)} />
-            </Form>
-            <div className="button" onClick={handleLogin}>Entrar</div>
-            <Link to="/cadastro">
-                <p>Não tem uma conta? Cadastre-se!</p>
-            </Link>
-        </Home>
-    );
+        <Container>
+            <img src={logo} alt="Logo App" />
+            <ToastContainer position="top-right" />
+            <form>
+                <input type="email" placeholder="E-mail" value={userLogin.email} name="email" onChange={ChangeInput} />
+                <input type="password" placeholder='Senha' value={userLogin.password} name="password" onChange={ChangeInput} />
+                {loading === false ? (
+                    <Button type={'submit'} text={'Entrar'} destiny={''} action={login} />
+                ) : (
+                    <Loader type="Rings" color="#52B6FF" height={100} width={100} />
+                )}
+            </form>
+            <Button loading={loading} type={'button'} text={'Não tem uma conta? cadastre-se!'} destiny={'/cadastro'} />
+        </ Container>
+    )
 }
 
-const Home = styled.div`
-    width: 100%;
+const Container = styled.div`
     height: 100vh;
-    display: flex;
     align-items: center;
     justify-content: center;
+    gap: 20px;
+    display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-
-    img {
-        width: 180px;
-        height: 178.38px;
-        margin-bottom: 32px;
+    form {
+        width: 100%;
+        align-items: center;
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
+        button {
+            background-color: #52B6FF;
+            color: #FFFFFF;
+            font-size: 20.976px;
+            line-height: 26px;
+            text-decoration-line: none;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        a { 
+            width: 90%;
+        }
     }
-
-    input {
-        width: 80%;
-        height: 45px;
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
+    button, input {
+        min-width: 90%;
+        height: 40px;
         border-radius: 5px;
-        margin-bottom: 6px;
-
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;
-        /* identical to box height */
-        color: #DBDBDB;
     }
-
-    .button {
-        width: 80%;
-        heigth: 45px;
-        padding: 10px;
-        background: #52B6FF;
-        border-radius: 4px;
-
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 26px;
-        text-align: center;
-
-        color: #FFFFFF;
-        margin-bottom: 25px;
-    }
-
-    p {
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
+    button {
+        width: 100%;
+        background-color: #ffffff;
+        color: #52B6FF;
         font-size: 13.976px;
         line-height: 17px;
-        text-align: center;
         text-decoration-line: underline;
-        color: #52B6FF;
+        span { 
+            &:hover{
+                cursor: pointer;
+            }
+        }
     }
 `;
-
-const Form = styled.form`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`;
-
-export default Login;

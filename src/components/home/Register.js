@@ -1,129 +1,112 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import logo from '../../assets/img/logo.png';
 import axios from 'axios';
+import Button from "../Button";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "react-loader-spinner";
+import logo from '../../assets/logo.png';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
-function Register() {
+import styled from 'styled-components';
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [image, setImage] = useState('');
+export default function PageRegister({ loading, setLoading }) {
 
     const navigate = useNavigate();
+    const [user, setUser] = useState({
+        email: '',
+        name: '',
+        image: '',
+        password: ''
+    });
 
-    function Navigate() {
-        navigate("/");
+    function register(e) {
+        e.preventDefault();
+        setLoading(true);
+
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', { ...user });
+        promise.then(response => {
+            navigate('/');
+            setLoading(false);
+        });
+        promise.catch(err => {
+            console.log(err);
+            setLoading(false);
+            toast.error('E-mail ou senha inválidos!');
+        });
     }
 
-    function SignUp() {
-
-        const body = {
-            email: email,
-            name: name,
-            image: image,
-            password: password,
-        }
-
-        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
-
-        promise
-            .then(res => {
-                console.log(res.data);
-                Navigate();
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
+    function ChangeInput(e) {
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
     return (
-        <Registe>
-            <img src={logo} alt="TrackIt" />
-            <Form>
-                <input type="text" placeholder='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="text" placeholder='senha' required value={password} onChange={(e) => setPassword(e.target.value)} />
-                <input type="text" placeholder='nome' required value={name} onChange={(e) => setName(e.target.value)} />
-                <input type="text" placeholder='foto' required value={image} onChange={(e) => setImage(e.target.value)} />
-            </Form>
-            <div onClick={SignUp}>Cadastrar</div>
-            <Link to="/" >
-                <p>Já tem uma conta? Faça login!</p>
-            </Link>
-        </Registe>
-    );
+        <ContainerRegister>
+            <img src={logo} alt="Logo App" />
+            <ToastContainer position="top-right" />
+
+            <form>
+                <input type="email" placeholder="E-mail" value={user.email} name="email" onChange={ChangeInput} />
+                <input type="password" placeholder='Senha' value={user.password} name="password" onChange={ChangeInput} />
+                <input type="text" placeholder='Nome' value={user.name} name="name" onChange={ChangeInput} />
+                <input type="url" placeholder="Imagem" value={user.image} name="image" onChange={ChangeInput} />
+
+                {loading === false ? (
+                    <Button type={'submit'} text={'Cadastrar'} destiny={''} action={register} />
+                ) : (
+                    <Loader type="Rings" color="#52B6FF" height={100} width={100} />
+                )}
+            </form>
+
+            <Button type="button" text={'Já tem uma conta? Faça login'} destiny={'/'} />
+        </ ContainerRegister>
+    )
 }
 
-const Registe = styled.div`
-    width: 100%;
+
+const ContainerRegister = styled.div`
     height: 100vh;
-    display: flex;
+    
     align-items: center;
     justify-content: center;
+    gap: 20px;
+    display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-
-    img {
-        width: 180px;
-        height: 178.38px;
-        margin-bottom: 32px;
+    form {
+        width: 100%;
+        align-items: center;
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
+        button {
+            background-color: #52B6FF;
+            color: #FFFFFF;
+            font-size: 20.976px;
+            line-height: 26px;
+            text-decoration-line: none;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        a { 
+            width: 90%;
+        }
     }
-
-    input {
-        width: 80%;
-        height: 45px;
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
+    button, input {
+        min-width: 90%;
+        height: 40px;
         border-radius: 5px;
-        margin-bottom: 6px;
-
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;
-        /* identical to box height */
-        color: #DBDBDB;
     }
-
-    div {
-        width: 80%;
-        heigth: 45px;
-        padding: 10px;
-        background: #52B6FF;
-        border-radius: 4px;
-
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 26px;
-        text-align: center;
-
-        color: #FFFFFF;
-        margin-bottom: 25px;
-    }
-
-    p {
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
+    button {
+        width: 100%;
+        background-color: #ffffff;
+        color: #52B6FF;
         font-size: 13.976px;
         line-height: 17px;
-        text-align: center;
         text-decoration-line: underline;
-        color: #52B6FF;
+        span { 
+            &:hover{
+                cursor: pointer;
+            }
+        }
     }
 `;
-
-const Form = styled.form`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`;
-
-export default Register;

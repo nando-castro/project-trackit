@@ -1,24 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './../assets/css/reset.css';
-import './../assets/css/style.css';
-import Login from "./home/Login";
-import Register from "./home/Register";
-import Main from "./habits/Main";
 import { useState } from "react";
 
-export default function App() {
+import './../assets/css/reset.css';
+import './../assets/css/style.css';
+import PageLogin from "./home/Login";
+import PageToday from "./today/Today";
+import PageRegister from "./home/Register";
+import History from "./history/History";
+import Habits from "./habits/Habits";
 
-    const [token, setToken] = useState('');
+function App() {
+
+    const [loading, setLoading] = useState(false);
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login setToken={setToken} />} />
-                <Route path="/cadastro" element={<Register />} />
-                <Route path="/habitos" element={<Main token={token} />} />
-                {/* <Route path="/hoje" element={<TelaHoje />} />
-                <Route path="/historico" element={<TelaHistorico />} /> */}
+                <Route path='/' element={<PageLogin loading={loading} setLoading={setLoading} setUserData={setUserData} />} />
+                <Route path='/cadastro' element={<PageRegister loading={loading} setLoading={setLoading} />} />
+                <Route path='/habitos' element={<Habits loading={loading} setLoading={setLoading} />} />
+                <Route path='/hoje' element={<PageToday loading={loading} setLoading={setLoading} userData={userData} />} />
+                <Route path='/historico' element={<History />} />
             </Routes>
         </BrowserRouter>
-    );
+    )
 }
+
+export default App;
